@@ -2,6 +2,7 @@
 % Please edit documentation in R/testx.R
 \name{testx}
 \alias{testx}
+\title{square a number}
 \usage{
 testx(x)
 }
@@ -10,5 +11,8 @@ testx(x)
 }
 \value{
 x squared
+}
+\description{
+square a number
 }
 
