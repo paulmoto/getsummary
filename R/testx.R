@@ -1,3 +1,4 @@
+#' square a number
 #' @param x numeric
 #' @return x squared
 #' @export
