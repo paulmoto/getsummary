@@ -6,14 +6,14 @@
 #'
 #'
 #'
-
+require(openNLP)
+require(NLP)
+require(stringr)
+require(igraph)
 
 getsummary<-function(text)
 {
-  library(openNLP)
-  library(NLP)
-  library(stringr)
-  library(igraph)
+  
   text<-str_replace_all(text,"[\n]"," ")
   sent_annotate<-Maxent_Sent_Token_Annotator()
   sent<-annotate(text,sent_annotate)
