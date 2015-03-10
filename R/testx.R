@@ -1,7 +1,7 @@
 #' square a number
 #' @param x numeric
 #' @return x squared
-#' @export
+#' @export testx
 
 testx<-function(x) {
   return(x^2)
