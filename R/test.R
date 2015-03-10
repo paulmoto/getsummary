@@ -1,4 +1,5 @@
 #' @param x numeric
+#' @return x squared
 #' @export
 
 test<-function(x) {
