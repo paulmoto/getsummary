@@ -2,7 +2,7 @@
 #' @return x squared
 #' @export
 
-test<-function(x) {
+testx<-function(x) {
   return(x^2)
 }
   
