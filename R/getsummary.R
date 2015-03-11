@@ -1,6 +1,7 @@
 #' Summarize an article
 #' 
 #' @param text character string to be summarized
+#' @param n number of sentences in summary
 #' @return two summaries of the text
 #' @export
 #'
@@ -11,7 +12,7 @@ require(NLP)
 require(stringr)
 require(igraph)
 
-getsummary<-function(text)
+getsummary<-function(text,arg2)
 {
   
   text<-str_replace_all(text,"[\n]"," ")
@@ -51,31 +52,15 @@ getsummary<-function(text)
   diag(adj)<-1
   
   
-  cosadj<-matrix(NA,length(sentences),length(sentences))
-  #cosine distance = angle between vectors [0,pi/2]
-  for(i in 1:nrow(cosadj)){
-    for(j in 1:ncol(cosadj)){
-      if (!i==j){cosadj[i,j]<-1/acos((dict[,i+1]%*%dict[,j+1])/((sqrt(sum(dict[,i+1]^2)))*(sqrt(sum(dict[,j+1]^2)))))}
-    }
-  }
-  diag(cosadj)<-0
   
   
   g<-graph.adjacency(adj,weighted=T,mode='undirected')
   pgr<-page.rank(g)$vector
   summ<-data.frame(origsent,pgr)[order(-pgr),]
   #n sentence summary
-  n<-3
-  summary<-as.character(summ[1:n,1][order(row.names(summ))])
+
+  summary<-as.character(summ[1:arg2,1][order(row.names(summ))])
   summary<-summary[!is.na(summary)]
-  
-  g2<-graph.adjacency(cosadj,weighted=T,mode='undirected')
-  pgr2<-page.rank(g2)$vector
-  summ2<-data.frame(origsent,pgr2)[order(-pgr2),]
-  #n sentence summary
-  n<-3
-  summary2<-as.character(summ2[1:n,1][order(row.names(summ2))])
-  summary2<-summary2[!is.na(summary2)]
-  
-  return(cat("Summary 1: ",summary,"\n\n", "Summary 2: ",summary2))
+    
+  return(cat("Summary 1: ",summary))
 }
